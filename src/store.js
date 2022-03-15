@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 const state = Vue.observable({
-    filter: '',
+    filter: "",
 });
 
 export default state;
