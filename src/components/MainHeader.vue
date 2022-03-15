@@ -11,7 +11,9 @@
           placeholder="Search a film or a series"
           v-model="filter"
         />
-        <button class="header__search-btn" @click="updateFilter()">Search</button>
+        <button class="header__search-btn" @click="getSearchedItems()">
+          Search
+        </button>
       </nav>
     </div>
   </header>
@@ -19,19 +21,34 @@
 
 <script>
 import state from "../store.js";
+import axios from "axios";
 
 export default {
   name: "MainHeader",
   data() {
-      return {
-          filter: '',
-      }
+    return {
+      filter: "",
+      baseUrl: "https://api.themoviedb.org/3",
+    };
   },
   methods: {
-      updateFilter () {
-          state.filter = this.filter;
+    getSearchedItems() {
+      if (this.filter != "") {
+        axios
+          .get(`${this.baseUrl}/search/movie`, {
+            params: {
+              api_key: "20fefb6c28c97eabe3d7a5781f7ea9db",
+              query: this.filter,
+            },
+          })
+          .then((res) => {
+            state.searchedItems = res.data.results;
+          });
+      } else {
+        state.searchedItems = [];
       }
-  }
+    },
+  },
 };
 </script>
 
