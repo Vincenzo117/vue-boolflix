@@ -9,10 +9,10 @@
           type="text"
           class="header__searchbar"
           placeholder="Search a film or a series"
-          v-model="filter"
-          @keyup.enter="searchItems()"
+          v-model="searchInput"
+          @keyup="search()"
         />
-        <button class="header__search-btn" @click="searchItems()">
+        <button class="header__search-btn" @click="search()">
           Search
         </button>
       </nav>
@@ -22,41 +22,20 @@
 
 <script>
 import state from "../store.js";
-import axios from "axios";
 
 export default {
   name: "MainHeader",
   data() {
     return {
-      filter: "",
-      baseURI: "https://api.themoviedb.org/3",
+      searchInput: "",
     };
   },
   methods: {
-    fetchItems() {
-      if (this.filter != "") {
-        axios
-          .get(`${this.baseURI}/search/movie`, {
-            params: {
-              api_key: "20fefb6c28c97eabe3d7a5781f7ea9db",
-              query: this.filter,
-            },
-          })
-          .then(res => {
-            state.searchedItems = res.data.results;
-            this.filter = '';
-          })
-          .catch(err => {
-            console.warn(err.response)
-          })
-      } else {
-        state.searchedItems = [];
-      }
-    },
-    searchItems() {
-      this.fetchItems();
-    },
-  },
+    search() {
+      state.filter = this.searchInput;
+      state.searchItems();
+    }
+  }
 };
 </script>
 
