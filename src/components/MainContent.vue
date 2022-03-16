@@ -1,6 +1,7 @@
 <template>
   <main>
     <div class="container">
+      <h2 class="category__title">{{filter ? 'Results' : 'Trending today'}}</h2>
       <div class="items-wrapper">
         <ItemCard
           v-for="item in searchedItems"
@@ -25,18 +26,28 @@ export default {
     searchedItems() {
       return state.searchedItems;
     },
+    filter() {
+      return state.filter;
+    }
   },
+  created () {
+    state.getItems();
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 main {
   .container {
+    .category__title {
+      margin-bottom: 30px;
+    }
+
     .items-wrapper {
       display: flex;
-      justify-content: center;
+      justify-content: start;
       flex-wrap: wrap;
-      gap: 30px 2%;
+      gap: 40px 30px;
     }
   }
 }

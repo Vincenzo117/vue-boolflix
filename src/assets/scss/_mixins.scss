@@ -1,4 +1,12 @@
+@import "./variables.scss";
+
 @mixin container {
     max-width: 1750px;
     padding: 20px 40px;
+}
+
+@mixin card-text {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: $secondary_color;
 }

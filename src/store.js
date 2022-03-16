@@ -6,14 +6,14 @@ const state = Vue.observable({
     filter: "",
     baseURI: "https://api.themoviedb.org/3",
     fetchItems() {
-        if (this.filter != "") {
+        if (state.filter != "") {
 
             // Get movies
             axios
-                .get(`${this.baseURI}/search/movie`, {
+                .get(`${state.baseURI}/search/movie`, {
                     params: {
                         api_key: "20fefb6c28c97eabe3d7a5781f7ea9db",
-                        query: this.filter,
+                        query: state.filter,
                     },
                 })
                 .then(res => {
@@ -22,30 +22,42 @@ const state = Vue.observable({
                 .catch(err => {
                     console.warn(err.response)
                 })
-                
+
                 // Get series
-                .then(function () {
-                    axios
-                        .get(`${this.baseURI}/search/tv`, {
-                            params: {
-                                api_key: "20fefb6c28c97eabe3d7a5781f7ea9db",
-                                query: this.filter,
-                            },
-                        })
-                        .then(res => {
-                            state.searchedItems += res.data.results;
-                        })
-                        .catch(err => {
-                            console.warn(err.response)
-                        })
-                }
-                )
+                // .then(function () {
+                //     axios
+                //         .get(`${state.baseURI}/search/tv`, {
+                //             params: {
+                //                 api_key: "20fefb6c28c97eabe3d7a5781f7ea9db",
+                //                 query: state.filter,
+                //             },
+                //         })
+                //         .then(res => {
+                //             state.searchedItems += res.data.results;
+                //         })
+                //         .catch(err => {
+                //             console.warn(err.response)
+                //         })
+                // }
+                // )
         } else {
-            state.searchedItems = [];
+            // Get Trending 
+            axios
+                .get(`${state.baseURI}/trending/all/day`, {
+                    params: {
+                        api_key: "20fefb6c28c97eabe3d7a5781f7ea9db",
+                    },
+                })
+                .then(res => {
+                    state.searchedItems = res.data.results;
+                })
+                .catch(err => {
+                    console.warn(err.response)
+                })
         }
     },
-    searchItems() {
-        this.fetchItems();
+    getItems() {
+        state.fetchItems();
     },
 });
 

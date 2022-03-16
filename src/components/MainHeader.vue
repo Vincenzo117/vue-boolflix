@@ -33,7 +33,7 @@ export default {
   methods: {
     search() {
       state.filter = this.searchInput;
-      state.searchItems();
+      state.getItems();
     }
   }
 };
