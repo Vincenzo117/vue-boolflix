@@ -14,6 +14,7 @@
     <div class="item__language">
       Language: {{ getFlag(item.original_language) }}
     </div>
+    <div class="item__type">Type: {{ item.title ? "Movie" : "TV series" }}</div>
     <div class="item__vote">
       <img
         :class="[
@@ -80,6 +81,10 @@ export default {
   }
 
   .item__language {
+    @include card-text;
+  }
+
+  .item__type {
     @include card-text;
   }
 
