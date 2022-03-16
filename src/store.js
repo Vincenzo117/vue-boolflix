@@ -7,6 +7,8 @@ const state = Vue.observable({
     baseURI: "https://api.themoviedb.org/3",
     fetchItems() {
         if (this.filter != "") {
+
+            // Get movies
             axios
                 .get(`${this.baseURI}/search/movie`, {
                     params: {
@@ -20,6 +22,24 @@ const state = Vue.observable({
                 .catch(err => {
                     console.warn(err.response)
                 })
+                
+                // Get series
+                .then(function () {
+                    axios
+                        .get(`${this.baseURI}/search/tv`, {
+                            params: {
+                                api_key: "20fefb6c28c97eabe3d7a5781f7ea9db",
+                                query: this.filter,
+                            },
+                        })
+                        .then(res => {
+                            state.searchedItems += res.data.results;
+                        })
+                        .catch(err => {
+                            console.warn(err.response)
+                        })
+                }
+                )
         } else {
             state.searchedItems = [];
         }

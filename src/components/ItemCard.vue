@@ -1,7 +1,7 @@
 <template>
   <div class="item-card">
-    <h3 class="item__title">Titolo: {{ item.title }}</h3>
-    <div class="item__original-title">Titolo originale: {{ item.original_title }}</div>
+    <h3 class="item__title">Titolo: {{ item.title ? item.title : item.name }}</h3>
+    <div class="item__original-title">Titolo originale: {{ item.original_title ? item.original_title : item.original_name }}</div>
     <div class="item__vote">Voto: {{ item.vote_average }}</div>
     <div class="item__language">{{ getFlag(item.original_language) }}</div>
   </div>
@@ -28,7 +28,7 @@ export default {
       } else {
         return lan;
       }
-    },
+    }
   },
 };
 </script>
