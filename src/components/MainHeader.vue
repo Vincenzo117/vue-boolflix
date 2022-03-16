@@ -10,7 +10,7 @@
           class="header__searchbar"
           placeholder="Search a film or a series"
           v-model="searchInput"
-          @keyup="search()"
+          @keyup.enter="search()"
         />
         <button class="header__search-btn" @click="search()">
           Search
@@ -54,6 +54,7 @@ header {
       color: $accent-color;
       font-weight: 600;
       font-size: 30px;
+      cursor: pointer;
     }
 
     .header__nav {

@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="container">
-      <h2 class="category__title">{{filter ? 'Results' : 'Trending today'}}</h2>
+      <h1 class="category__title">{{filter ? 'Results' : 'Trending today'}}</h1>
       <div class="items-wrapper">
         <ItemCard
           v-for="item in searchedItems"

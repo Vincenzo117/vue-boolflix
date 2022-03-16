@@ -1,12 +1,31 @@
 <template>
   <div class="item-card">
     <figure class="item__thumb">
-      <img :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`" alt="">
+      <img
+        :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`"
+        alt=""
+      />
     </figure>
     <h3 class="item__title">{{ item.title ? item.title : item.name }}</h3>
-    <div class="item__original-title">Original title: {{ item.original_title ? item.original_title : item.original_name }}</div>
-    <div class="item__language">Language: {{ getFlag(item.original_language) }}</div>
-    <div class="item__vote">Vote: {{ item.vote_average }}</div>
+    <div class="item__original-title">
+      Original title:
+      {{ item.original_title ? item.original_title : item.original_name }}
+    </div>
+    <div class="item__language">
+      Language: {{ getFlag(item.original_language) }}
+    </div>
+    <div class="item__vote">
+      <img
+        :class="[
+          'star',
+          i <= Math.ceil(item.vote_average / 2) ? 'star-yellow' : '',
+        ]"
+        v-for="i in [1, 2, 3, 4, 5]"
+        :key="i"
+        src="../assets/img/star.png"
+        alt=""
+      />
+    </div>
   </div>
 </template>
 
@@ -31,7 +50,7 @@ export default {
       } else {
         return lan;
       }
-    }
+    },
   },
 };
 </script>
@@ -42,9 +61,8 @@ export default {
 
 .item-card {
   width: calc(94% / 4);
-  text-align: center;
   width: 200px;
-  
+
   .item__thumb {
     margin-bottom: 10px;
     img {
@@ -53,7 +71,8 @@ export default {
   }
 
   .item__title {
-    margin-bottom: 10px;
+    text-align: center;
+    margin-bottom: 15px;
   }
 
   .item__original-title {
@@ -66,7 +85,15 @@ export default {
 
   .item__vote {
     @include card-text;
-  }
 
+    .star {
+      width: 15px;
+
+      &.star-yellow {
+        filter: invert(61%) sepia(79%) saturate(639%) hue-rotate(3deg)
+          brightness(97%) contrast(100%);
+      }
+    }
+  }
 }
 </style>
