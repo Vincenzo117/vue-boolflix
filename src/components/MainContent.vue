@@ -5,7 +5,7 @@
         <ItemCard
           v-for="item in searchedItems"
           :key="item.id"
-          :itemObject="item"
+          :item="item"
         />
       </div>
     </div>
@@ -31,9 +31,12 @@ export default {
 
 <style lang="scss" scoped>
 main {
-  .contaniner {
+  .container {
     .items-wrapper {
       display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px 2%;
     }
   }
 }

@@ -10,8 +10,9 @@
           class="header__searchbar"
           placeholder="Search a film or a series"
           v-model="filter"
+          @keyup.enter="searchItems()"
         />
-        <button class="header__search-btn" @click="getSearchedItems()">
+        <button class="header__search-btn" @click="searchItems()">
           Search
         </button>
       </nav>
@@ -28,25 +29,32 @@ export default {
   data() {
     return {
       filter: "",
-      baseUrl: "https://api.themoviedb.org/3",
+      baseURI: "https://api.themoviedb.org/3",
     };
   },
   methods: {
-    getSearchedItems() {
+    fetchItems() {
       if (this.filter != "") {
         axios
-          .get(`${this.baseUrl}/search/movie`, {
+          .get(`${this.baseURI}/search/movie`, {
             params: {
               api_key: "20fefb6c28c97eabe3d7a5781f7ea9db",
               query: this.filter,
             },
           })
-          .then((res) => {
+          .then(res => {
             state.searchedItems = res.data.results;
-          });
+            this.filter = '';
+          })
+          .catch(err => {
+            console.warn(err.response)
+          })
       } else {
         state.searchedItems = [];
       }
+    },
+    searchItems() {
+      this.fetchItems();
     },
   },
 };
