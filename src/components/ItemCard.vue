@@ -3,7 +3,7 @@
     <figure class="item__thumb">
       <img
         :src="`https://image.tmdb.org/t/p/w342/${item.poster_path}`"
-        alt=""
+        alt="img not found"
       />
     </figure>
     <h3 class="item__title">{{ item.title ? item.title : item.name }}</h3>
@@ -66,6 +66,10 @@ export default {
 
   .item__thumb {
     margin-bottom: 10px;
+    height: 300px;
+    color: $secondary_color;
+    text-align: center;
+    line-height: 300px;
     img {
       width: 100%;
     }
