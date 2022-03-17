@@ -10,7 +10,7 @@
           class="header__searchbar"
           placeholder="Search a film or a series"
           v-model="searchInput"
-          @keyup.enter="search()"
+          @keyup="search()"
         />
         <button class="header__search-btn" @click="search()">
           Search
