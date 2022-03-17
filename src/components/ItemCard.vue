@@ -30,6 +30,9 @@
             alt=""
           />
         </div>
+        <div class="item__overview">
+          Overview: {{ item.overview }}
+        </div>
       </div>
     </figure>
   </div>
@@ -75,6 +78,7 @@ export default {
     position: relative;
     cursor: pointer;
     text-align: center;
+    overflow: hidden;
 
     img {
       color: $secondary_color;
@@ -93,6 +97,7 @@ export default {
       bottom: 0px;
       display: none;
       text-align: left;
+      overflow: auto;
     }
 
     &:hover .item__info {
@@ -128,6 +133,10 @@ export default {
             brightness(97%) contrast(100%);
         }
       }
+    }
+
+    .item__overview {
+      @include card-text;
     }
   }
 }
