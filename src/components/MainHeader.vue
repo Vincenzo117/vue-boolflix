@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="container">
-      <figure class="header__logo">
+      <figure class="header__logo" @click="goToHome()">
         <img src="" alt="Boolflix" />
       </figure>
       <nav class="header__nav">
@@ -34,6 +34,11 @@ export default {
     search() {
       state.filter = this.searchInput;
       state.getItems();
+    },
+    goToHome () {
+      this.searchInput = '',
+      state.filter = '',
+      state.getItems()
     }
   }
 };

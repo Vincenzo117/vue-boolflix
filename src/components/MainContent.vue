@@ -2,7 +2,7 @@
   <main>
     <div class="container">
       <h1 class="category__title">
-        {{ filter ? "Results:" : "Trending today:" }}
+        {{ filter ? "Results" : "Trending today" }}
       </h1>
       <div class="items-wrapper">
         <ItemCard 
